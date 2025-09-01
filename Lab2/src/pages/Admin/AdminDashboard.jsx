@@ -72,7 +72,10 @@ export default function AdminPanel() {
   const fetchProducts = () => {
     fetch("http://localhost:5000/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => {
+        console.log('data.data',data.data)
+        setProducts(data.data)
+  });
   };
 
   // Filter subcategories when category changes in lab category form
@@ -108,6 +111,19 @@ export default function AdminPanel() {
         .then((data) => setLabCategories(data));
     }
   }, [productForm.subCategory]);
+
+  // Fetch product when subcategory changes in product form
+
+  const handleViewProducts = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/products");
+      const data = await res.json();
+      setProducts(data);
+      console.log(products);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // Category handlers
   const handleCategoryChange = (e) => {
@@ -340,7 +356,7 @@ export default function AdminPanel() {
           >
             Add Lab Category
           </button>
-          {/* <button
+          <button
             className={`px-4 py-2 font-medium ${
               activeTab === "viewData"
                 ? "border-b-2 border-blue-500 text-blue-600"
@@ -348,8 +364,8 @@ export default function AdminPanel() {
             }`}
             onClick={() => setActiveTab("viewData")}
           >
-            View Data
-          </button> */}
+            View product
+          </button>
         </div>
 
         {/* Add Product Form */}
@@ -841,18 +857,15 @@ export default function AdminPanel() {
                           <td className="py-2 px-4 border-b">
                             {product.PCode}
                           </td>
+
+                          {/* Categories (array) */}
                           <td className="py-2 px-4 border-b">
-                            {
-                              categories.find((c) => c._id === product.category)
-                                ?.name
-                            }
+                            {product.categories?.map((c) => c.name).join(", ")}
                           </td>
+
+                          {/* Subcategory (single object) */}
                           <td className="py-2 px-4 border-b">
-                            {
-                              subcategories.find(
-                                (s) => s._id === product.subCategory
-                              )?.name
-                            }
+                            {product.subCategory?.name}
                           </td>
                         </tr>
                       ))}

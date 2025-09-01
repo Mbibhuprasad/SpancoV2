@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
-import { DataProvider } from "./context/DataContext";
+// import { DataProvider } from "./context/DataContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import BikeCollection from "./components/Services";
@@ -36,7 +36,7 @@ const HomePage = () => (
 function App() {
   return (
     <ThemeProvider>
-      <DataProvider>
+      {/* <DataProvider/> */}
         <Router>
           <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 ">
             <Header />
@@ -91,7 +91,7 @@ function App() {
             <Footer />
           </div>
         </Router>
-      </DataProvider>
+      {/* </DataProvider> */}
     </ThemeProvider>
   );
 }
