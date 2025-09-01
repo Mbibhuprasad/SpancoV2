@@ -29,6 +29,7 @@ export default function LabCategoryPage() {
     }
   }, [categoryId]);
 
+  console.log("labcata gory renderr");
   // Fetch lab category details
   useEffect(() => {
     if (labCategoryId) {

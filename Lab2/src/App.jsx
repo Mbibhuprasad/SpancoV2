@@ -22,7 +22,6 @@ import ProductOnLabCategories from "./pages/HigherEducationPage";
 import SubcategoryProductsPage from "./pages/SubcategoryProductsPage";
 
 import ProductShowPage from "./pages/ProductShowPage";
-import LabCategoryPage from "./pages/LabCategoryPage"; // Add this import
 
 const HomePage = () => (
   <>
@@ -75,14 +74,18 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<Login />} />
 
-              {/* Updated routes to include lab category */}
+              {/* Updated routes to use the single ProductShowPage */}
+              <Route
+                path="/category/:categoryId"
+                element={<ProductShowPage />}
+              />
               <Route
                 path="/category/:categoryId/subcategory/:subcategoryId"
                 element={<ProductShowPage />}
               />
               <Route
                 path="/category/:categoryId/subcategory/:subcategoryId/labcategory/:labCategoryId"
-                element={<LabCategoryPage />}
+                element={<ProductShowPage />}
               />
             </Routes>
             <Footer />
