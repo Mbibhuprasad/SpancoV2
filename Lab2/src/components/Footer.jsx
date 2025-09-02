@@ -1,148 +1,317 @@
-import React from 'react';
-import { Facebook, Twitter, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+import React from "react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
-  const quickLinks = ['Home', 'Enggineering', 'Higher Education', 'School', 'Skill Development', 'Furniture'];
-  const categories = ['Laboratory Instruments', 'Glassware', 'Chemicals & Reagents', 'Microscopes', 'Safety Equipment', 'Medical Devices'];
-  const services = ['Engineering', 'Higher Education', 'Biotechnology', 'School', 'Skill Development', 'Lab Furniture'];
+  const quickLinks = [
+    "Home",
+    "Enggineering",
+    "Higher Education",
+    "School",
+    "Skill Development",
+    "Furniture",
+  ];
+  const categories = [
+    "Laboratory Instruments",
+    "Glassware",
+    "Chemicals & Reagents",
+    "Microscopes",
+    "Safety Equipment",
+    "Medical Devices",
+  ];
+  const services = [
+    "Engineering",
+    "Higher Education",
+    "Biotechnology",
+    "School",
+    "Skill Development",
+    "Lab Furniture",
+  ];
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
+  const staggerChildren = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { y: 10, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 12,
+      },
+    },
+  };
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white transition-colors duration-300">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="bg-gray-900 dark:bg-black text-white transition-colors duration-300"
+    >
       <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {/* Company Info */}
-          <div className="space-y-6">
+          <motion.div variants={itemVariants} className="space-y-6">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-[#703233] to-[#973E42] rounded-lg flex items-center justify-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-10 h-10 bg-gradient-to-r from-[#703233] to-[#973E42] rounded-lg flex items-center justify-center"
+              >
                 <span className="text-white font-bold text-xl">S</span>
-              </div>
+              </motion.div>
               <span className="text-2xl font-bold">Spanco Tek</span>
             </div>
-            <p className="text-gray-400 leading-relaxed">
-              Your trusted partner for premium motorcycles and exceptional riding experiences. Quality, performance, and customer satisfaction guaranteed.
-            </p>
+            <motion.p
+              whileHover={{ x: 5 }}
+              className="text-gray-400 leading-relaxed"
+            >
+              Your trusted partner for premium motorcycles and exceptional
+              riding experiences. Quality, performance, and customer
+              satisfaction guaranteed.
+            </motion.p>
             <div className="flex space-x-4">
-              <a
+              <motion.a
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
                 href="#"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-[#703233] transition-colors duration-200"
               >
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
                 href="#"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
               >
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
                 href="#"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
               >
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
                 href="#"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
               >
                 <Youtube className="w-5 h-5" />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase().replace(' ', '-')}`}
-                    className="text-gray-400 hover:text-[#973E42] transition-colors duration-200"
+            <motion.ul
+              variants={staggerChildren}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
+              {quickLinks.map((link, index) => (
+                <motion.li key={link} variants={childVariants}>
+                  <motion.a
+                    whileHover={{ x: 5, color: "#973E42" }}
+                    href={`#${link.toLowerCase().replace(" ", "-")}`}
+                    className="text-gray-400 hover:text-[#973E42] transition-colors duration-200 block"
                   >
                     {link}
-                  </a>
-                </li>
+                  </motion.a>
+                </motion.li>
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
 
           {/* Categories */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6">Categories</h3>
-            <ul className="space-y-3">
+            <motion.ul
+              variants={staggerChildren}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
               {categories.map((category) => (
-                <li key={category}>
-                  <a
+                <motion.li key={category} variants={childVariants}>
+                  <motion.a
+                    whileHover={{ x: 5, color: "#973E42" }}
                     href="#"
-                    className="text-gray-400 hover:text-[#973E42] transition-colors duration-200"
+                    className="text-gray-400 hover:text-[#973E42] transition-colors duration-200 block"
                   >
                     {category}
-                  </a>
-                </li>
+                  </motion.a>
+                </motion.li>
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6">Contact Info</h3>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
+            <motion.div
+              variants={staggerChildren}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <motion.div
+                variants={childVariants}
+                className="flex items-center space-x-3"
+              >
                 <Phone className="w-5 h-5 text-[#703233]" />
                 <span className="text-gray-400">+91 9876543210</span>
-              </div>
-              <div className="flex items-center space-x-3">
+              </motion.div>
+              <motion.div
+                variants={childVariants}
+                className="flex items-center space-x-3"
+              >
                 <Mail className="w-5 h-5 text-[#703233]" />
-                <span className="text-gray-400">info@bikehub.com</span>
-              </div>
-              <div className="flex items-start space-x-3">
+                <span className="text-gray-400">spancotek@gmail.com</span>
+              </motion.div>
+              <motion.div
+                variants={childVariants}
+                className="flex items-start space-x-3"
+              >
                 <MapPin className="w-5 h-5 text-[#703233] mt-1" />
                 <span className="text-gray-400">
-                  123 Bike Street,<br />
-                  Motor City, MC 12345
+                  Sailshree Vihar, Patia.
+                  <br />
+                  Spancotek Pvt Ltd, Bhubaneswar, Odisha - 751024
                 </span>
-              </div>
-            </div>
-          </div>
-        </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
         {/* Services */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="border-t border-gray-800 mt-12 pt-8"
+        >
           <h3 className="text-lg font-bold mb-6 text-center">Our Services</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {services.map((service) => (
-              <a
+            {services.map((service, index) => (
+              <motion.a
                 key={service}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#973E42",
+                  transition: { duration: 0.2 },
+                }}
                 href="#"
                 className="text-center p-4 bg-gray-800 rounded-lg hover:bg-[#973E42] transition-colors duration-200 text-sm"
               >
                 {service}
-              </a>
+              </motion.a>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="border-t border-gray-800 mt-12 pt-8 text-center"
+        >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400">
-              © 2025 BikeHub. All rights reserved.
-            </p>
+            <motion.p whileHover={{ scale: 1.02 }} className="text-gray-400">
+              © 2025 Spancotek. All rights reserved.
+            </motion.p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-[#973E42] transition-colors duration-200">
+              <motion.a
+                whileHover={{ scale: 1.1, color: "#973E42" }}
+                href="#"
+                className="text-gray-400 hover:text-[#973E42] transition-colors duration-200"
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#973E42] transition-colors duration-200">
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1, color: "#973E42" }}
+                href="#"
+                className="text-gray-400 hover:text-[#973E42] transition-colors duration-200"
+              >
                 Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[#973E42] transition-colors duration-200">
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1, color: "#973E42" }}
+                href="#"
+                className="text-gray-400 hover:text-[#973E42] transition-colors duration-200"
+              >
                 Cookie Policy
-              </a>
+              </motion.a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

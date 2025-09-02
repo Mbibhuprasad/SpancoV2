@@ -9,7 +9,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -116,39 +116,110 @@ const Hero = () => {
 
   const words = ["World", "of", "Science"];
 
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const statItem = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { type: "spring", stiffness: 300 },
+    },
+  };
+
+  const buttonHover = {
+    scale: 1.05,
+    transition: { type: "spring", stiffness: 400, damping: 10 },
+  };
+
+  const buttonTap = {
+    scale: 0.95,
+  };
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3 } },
+    exit: { opacity: 0, transition: { duration: 0.2 } },
+  };
+
   return (
     <>
       <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black overflow-hidden transition-colors duration-500">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-400/20 to-red-400/20 dark:from-orange-500/10 dark:to-red-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 dark:from-blue-500/10 dark:to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-green-400/10 to-teal-400/10 dark:from-green-500/5 dark:to-teal-500/5 rounded-full blur-3xl animate-spin"
-            style={{ animationDuration: "20s" }}
-          ></div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-400/20 to-red-400/20 dark:from-orange-500/10 dark:to-red-500/10 rounded-full blur-3xl animate-pulse"
+          ></motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 dark:from-blue-500/10 dark:to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"
+          ></motion.div>
+          <motion.div
+            initial={{ opacity: 0, rotate: 0 }}
+            animate={{ opacity: 1, rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-green-400/10 to-teal-400/10 dark:from-green-500/5 dark:to-teal-500/5 rounded-full blur-3xl"
+          ></motion.div>
         </div>
 
         {/* Pattern */}
-        <div className="absolute inset-0 opacity-30 dark:opacity-10">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 dark:opacity-10"
+        >
           <div
             className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.15)_1px,transparent_0)] dark:bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)]"
             style={{ backgroundSize: "20px 20px" }}
           ></div>
-        </div>
+        </motion.div>
 
         <div className="container mx-auto px-4 py-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-            {/* LEFT CONTENT (unchanged) */}
-            <div className="space-y-8 animate-fade-in">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#703233]/10 to-[#973E42]/10 dark:from-[#703233]/20 dark:to-[#973E42]/20 border border-[#703233] dark:border-[#973E42] rounded-full">
+            {/* LEFT CONTENT */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="space-y-8"
+            >
+              <motion.div
+                variants={fadeIn}
+                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#703233]/10 to-[#973E42]/10 dark:from-[#703233]/20 dark:to-[#973E42]/20 border border-[#703233] dark:border-[#973E42] rounded-full"
+              >
                 <Zap className="w-4 h-4 text-[#703233] mr-2" />
                 <span className="text-sm font-semibold text-[#703233] dark:text-[#973E42]">
                   Premium Science Labs
                 </span>
-              </div>
+              </motion.div>
 
-              <div className="space-y-4">
+              <motion.div variants={fadeIn} className="space-y-4">
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                   <span className="block text-gray-900 dark:text-white">
                     Explore The
@@ -176,34 +247,51 @@ const Hero = () => {
                     </motion.div>
                   </span>
                 </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed">
+                <motion.p
+                  variants={fadeIn}
+                  className="text-xl text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed"
+                >
                   Step into our advanced laboratories for Physics, Chemistry,
                   and Biology. Conduct hands-on experiments, learn through
                   discovery, and innovate for the future of science.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  className={`group bg-gradient-to-r ${currentLab.gradient} text-white px-8 py-4 rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 font-semibold`}
+              <motion.div
+                variants={fadeIn}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <motion.button
+                  whileHover={buttonHover}
+                  whileTap={buttonTap}
+                  className={`group bg-gradient-to-r ${currentLab.gradient} text-white px-8 py-4 rounded-xl hover:shadow-2xl flex items-center justify-center space-x-2 font-semibold`}
                 >
                   <span>Explore Labs</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={buttonHover}
+                  whileTap={buttonTap}
                   onClick={openVideoModal}
-                  className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 font-semibold"
+                  className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center space-x-2 font-semibold"
                 >
                   <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                   <span>Watch Demo</span>
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
 
-              <div className="grid grid-cols-3 gap-6 pt-2">
+              <motion.div
+                variants={staggerContainer}
+                className="grid grid-cols-3 gap-6 pt-2"
+              >
                 {stats.map((stat, index) => {
                   const IconComponent = stat.icon;
                   return (
-                    <div key={index} className="text-center group">
+                    <motion.div
+                      key={index}
+                      variants={statItem}
+                      className="text-center group"
+                    >
                       <div className="flex justify-center mb-2">
                         <IconComponent
                           className={`w-8 h-8 ${stat.color} group-hover:scale-110 transition-transform duration-300`}
@@ -215,53 +303,71 @@ const Hero = () => {
                       <div className="text-gray-600 dark:text-gray-400 text-sm">
                         {stat.label}
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* RIGHT IMAGE FULL WIDTH */}
-            <div className="relative flex justify-center items-center w-full h-full">
-              <motion.div
-                key={currentSlide}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                transition={{ duration: 0.6, type: "spring" }}
-                className="relative overflow-hidden w-full h-[450px]"
-              >
-                <img
-                  src={currentLab.image}
-                  alt={currentLab.name}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 rounded-2xl overflow-hidden"
-                />
-                <div className="absolute inset-0 bg-black/30 rounded-2xl pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <h3 className="text-2xl font-bold">{currentLab.name}</h3>
-                  <p className="opacity-80">{currentLab.color}</p>
-                </div>
-              </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative flex justify-center items-center w-full h-full"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ scale: 0.8, opacity: 0, rotateY: 90 }}
+                  animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+                  exit={{ scale: 0.8, opacity: 0, rotateY: -90 }}
+                  transition={{ duration: 0.6, type: "spring" }}
+                  className="relative overflow-hidden w-full h-[450px]"
+                >
+                  <img
+                    src={currentLab.image}
+                    alt={currentLab.name}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 rounded-2xl overflow-hidden"
+                  />
+                  <div className="absolute inset-0 bg-black/30 rounded-2xl pointer-events-none" />
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <h3 className="text-2xl font-bold">{currentLab.name}</h3>
+                    <p className="opacity-80">{currentLab.color}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
               {/* NAV BUTTONS OUTSIDE IMAGE */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={prevSlide}
-                className="absolute -left-0 top-1/2 -translate-y-1/2 p-4 bg-gray-100 dark:bg-gray-800/90 rounded-full shadow-lg hover:scale-110 transition"
+                className="absolute -left-0 top-1/2 -translate-y-1/2 p-4 bg-gray-100 dark:bg-gray-800/90 rounded-full shadow-lg"
               >
                 <ChevronLeft className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={nextSlide}
-                className="absolute -right-0 top-1/2 -translate-y-1/2 p-4 bg-gray-100 dark:bg-gray-800/90 rounded-full shadow-lg hover:scale-110 transition"
+                className="absolute -right-0 top-1/2 -translate-y-1/2 p-4 bg-gray-100 dark:bg-gray-800/90 rounded-full shadow-lg"
               >
                 <ChevronRight className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-              </button>
+              </motion.button>
 
               {/* INDICATORS */}
-              <div className="flex justify-center mt-6 space-x-3 absolute -bottom-10 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex justify-center mt-6 space-x-3 absolute -bottom-10 w-full"
+              >
                 {labs.map((_, index) => (
-                  <button
+                  <motion.button
                     key={index}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
                     onClick={() => {
                       setIsAnimating(true);
                       setCurrentSlide(index);
@@ -274,60 +380,75 @@ const Hero = () => {
                     }`}
                   />
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="text-center mt-20 animate-fade-in">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="text-center mt-20"
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Choose Your Perfect Lab
           </h2>
-          <div
-            className={`w-24 h-1 bg-gradient-to-r ${currentLab.gradient} mx-auto rounded-full`}
-          ></div>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 96 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className={`h-1 bg-gradient-to-r ${currentLab.gradient} mx-auto rounded-full`}
+          ></motion.div>
           <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
             From Physics to Biology, find the laboratory that matches your
             curiosity and passion for science.
           </p>
-        </div>
-
-        <style jsx>{`
-          @keyframes fade-in {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          .animate-fade-in {
-            animation: fade-in 0.8s ease-out forwards;
-          }
-        `}</style>
+        </motion.div>
       </section>
 
       {/* Video Modal */}
-      {showVideoModal && (
-        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-4xl mx-auto">
-            <button
-              onClick={closeVideoModal}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition"
+      <AnimatePresence>
+        {showVideoModal && (
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+            onClick={closeVideoModal}
+          >
+            <motion.div
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="relative w-full max-w-4xl mx-auto"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-8 h-8" />
-            </button>
-            <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
-              <video className="w-full h-auto max-h-[80vh]" autoPlay muted loop>
-                <source src="./public/Lab_Demo.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-      )}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={closeVideoModal}
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition"
+              >
+                <X className="w-8 h-8" />
+              </motion.button>
+              <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
+                <video
+                  className="w-full h-auto max-h-[80vh]"
+                  autoPlay
+                  muted
+                  loop
+                >
+                  <source src="./public/Lab_Demo.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

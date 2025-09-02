@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,7 +39,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${import.meta.env.VITE_BACKEND_URI}/auth/login`,
         formData
       );
 
@@ -71,20 +72,31 @@ const Login = () => {
   };
 
   // If user is logged in, they won't see this component as they'll be redirected
-  // This part is just a fallback
   if (isLoggedIn) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        >
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            <motion.h2
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="text-2xl font-bold text-gray-800 mb-2"
+            >
               Welcome Admin!
-            </h2>
+            </motion.h2>
             <p className="text-gray-600 mb-6">
               You are logged in as {localStorage.getItem("adminEmail")}
             </p>
-            <button
+            <motion.button
               onClick={handleLogout}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105"
               disabled={loading}
             >
@@ -115,24 +127,39 @@ const Login = () => {
               ) : (
                 "Logout"
               )}
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+      >
+        <motion.h2
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-2xl font-bold text-center text-gray-800 mb-6"
+        >
           Admin Login
-        </h2>
+        </motion.h2>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+          >
             {error}
-          </div>
+          </motion.div>
         )}
 
         <form onSubmit={handleLogin}>
@@ -143,7 +170,8 @@ const Login = () => {
             >
               Email
             </label>
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
               type="email"
               id="email"
               name="email"
@@ -162,7 +190,8 @@ const Login = () => {
             >
               Password
             </label>
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.02 }}
               type="password"
               id="password"
               name="password"
@@ -174,8 +203,10 @@ const Login = () => {
             />
           </div>
 
-          <button
+          <motion.button
             type="submit"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105"
             disabled={loading}
           >
@@ -206,14 +237,19 @@ const Login = () => {
             ) : (
               "Login"
             )}
-          </button>
+          </motion.button>
         </form>
 
-        <p className="text-center text-gray-500 text-xs mt-6">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-gray-500 text-xs mt-6"
+        >
           This is the admin authentication section. Only authorized personnel
           should access this area.
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
     </div>
   );
 };

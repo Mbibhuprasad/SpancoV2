@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import TestRideModal from "./Contact";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -40,7 +41,7 @@ const Header = () => {
   }, []);
 
   const fetchCategories = () => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${import.meta.env.VITE_BACKEND_URI}/categories`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
@@ -50,7 +51,9 @@ const Header = () => {
 
   // Fetch subcategories when a category is clicked
   const fetchSubcategories = (categoryId) => {
-    fetch(`http://localhost:5000/api/subcategories/category/${categoryId}`)
+    fetch(
+      `${import.meta.env.VITE_BACKEND_URI}/subcategories/category/${categoryId}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSubcategories((prev) => ({
@@ -64,7 +67,9 @@ const Header = () => {
   // Fetch lab categories when a subcategory is hovered
   const fetchLabCategories = (subcategoryId) => {
     fetch(
-      `http://localhost:5000/api/labcategories/subcategory/${subcategoryId}`
+      `${
+        import.meta.env.VITE_BACKEND_URI
+      }/labcategories/subcategory/${subcategoryId}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -114,27 +119,120 @@ const Header = () => {
     };
   }, []);
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: -20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 12,
+      },
+    },
+  };
+
+  const dropdownVariants = {
+    hidden: {
+      opacity: 0,
+      y: -10,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const mobileMenuVariants = {
+    hidden: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    visible: {
+      opacity: 1,
+      height: "auto",
+      transition: {
+        duration: 0.4,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const mobileMenuItemVariants = {
+    hidden: { x: -20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 12,
+      },
+    },
+  };
+
   return (
     <>
-      <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg sticky top-0 z-40 transition-all duration-300">
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 120, damping: 15 }}
+        className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg sticky top-0 z-40 transition-all duration-300"
+      >
         <div className="">
           {/* Top bar */}
-          <div className="bg-gradient-to-r from-[#703233] to-[#973E42] hidden md:flex justify-between items-center py-3 px-10 text-sm border-b border-gray-200 dark:border-gray-700">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="bg-gradient-to-r from-[#703233] to-[#973E42] hidden md:flex justify-between items-center py-3 px-10 text-sm border-b border-gray-200 dark:border-gray-700"
+          >
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center space-x-2"
+              >
                 <Phone className="w-4 h-4 text-white" />
                 <span className="text-white dark:text-gray-300">
                   +91 9876543210
                 </span>
-              </div>
-              <div className="flex items-center space-x-2">
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center space-x-2"
+              >
                 <Mail className="w-4 h-4 text-white" />
                 <span className="text-white dark:text-gray-300">
                   info@spancotek.com
                 </span>
-              </div>
+              </motion.div>
             </div>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-800 transition-colors duration-200"
               aria-label="Toggle theme"
@@ -144,36 +242,53 @@ const Header = () => {
               ) : (
                 <Moon className="w-4 h-4 text-white" />
               )}
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
           {/* Main header */}
-          <div className="flex justify-between items-center py-4 px-10">
-            <div className="flex items-center space-x-2 ">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-between items-center py-4 px-10"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center space-x-2 "
+            >
               <Link to="/">
-                <img
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
                   className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
                   alt="Logo spancotek"
                   src="/spanco-tek.png"
                 />
               </Link>
-            </div>
+            </motion.div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium ${
-                  location.pathname === "/"
-                    ? "text-[#703233] dark:text-[#973E42]"
-                    : ""
-                }`}
-              >
-                Home
-              </Link>
+              <motion.div variants={itemVariants}>
+                <Link
+                  to="/"
+                  className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium ${
+                    location.pathname === "/"
+                      ? "text-[#703233] dark:text-[#973E42]"
+                      : ""
+                  }`}
+                >
+                  <motion.span whileHover={{ scale: 1.05 }} className="block">
+                    Home
+                  </motion.span>
+                </Link>
+              </motion.div>
 
               {categories.map((category) => (
-                <div key={category._id} className="relative">
+                <motion.div
+                  key={category._id}
+                  variants={itemVariants}
+                  className="relative"
+                >
                   <button
                     onClick={() => handleCategoryClick(category._id)}
                     className={`flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium ${
@@ -182,7 +297,9 @@ const Header = () => {
                         : ""
                     }`}
                   >
-                    <span>{category.name}</span>
+                    <motion.span whileHover={{ scale: 1.05 }}>
+                      {category.name}
+                    </motion.span>
                     {subcategories[category._id] &&
                       subcategories[category._id].length > 0 && (
                         <ChevronDown
@@ -194,194 +311,80 @@ const Header = () => {
                   </button>
 
                   {/* Dropdown Menu for subcategories */}
-                  {activeDropdown === category._id &&
-                    subcategories[category._id] &&
-                    subcategories[category._id].length > 0 && (
-                      <div className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 z-50">
-                        {subcategories[category._id].map((subcategory) => (
-                          <div
-                            key={subcategory._id}
-                            className="relative group"
-                            onMouseEnter={() =>
-                              handleSubcategoryMouseEnter(subcategory._id)
-                            }
-                          >
-                            <Link
-                              to={`/category/${category._id}/subcategory/${subcategory._id}`}
-                              className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0"
+                  <AnimatePresence>
+                    {activeDropdown === category._id &&
+                      subcategories[category._id] &&
+                      subcategories[category._id].length > 0 && (
+                        <motion.div
+                          variants={dropdownVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="hidden"
+                          className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 z-50"
+                        >
+                          {subcategories[category._id].map((subcategory) => (
+                            <motion.div
+                              key={subcategory._id}
+                              className="relative group"
+                              onMouseEnter={() =>
+                                handleSubcategoryMouseEnter(subcategory._id)
+                              }
+                              whileHover={{ scale: 1.02 }}
                             >
-                              <div className="flex items-center justify-between">
-                                <span>{subcategory.name}</span>
-                                {labCategories[subcategory._id] &&
-                                  labCategories[subcategory._id].length > 0 && (
-                                    <ChevronDown className="w-4 h-4 transform rotate-[-90deg]" />
-                                  )}
-                              </div>
-                            </Link>
-
-                            {/* Lab Categories for subcategories */}
-                            {labCategories[subcategory._id] &&
-                              labCategories[subcategory._id].length > 0 && (
-                                <div className="absolute left-full top-0 ml-1 w-72 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                  <div className="p-2">
-                                    <h4 className="font-semibold text-[#703233] dark:text-[#973E42] px-2 py-1 text-sm border-b border-gray-200 dark:border-gray-600 mb-2">
-                                      {subcategory.name} Labs
-                                    </h4>
-                                    {labCategories[subcategory._id].map(
-                                      (labCategory) => (
-                                        <Link
-                                          key={labCategory._id}
-                                          to={`/category/${category._id}/subcategory/${subcategory._id}/labcategory/${labCategory._id}`}
-                                          className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 rounded"
-                                        >
-                                          {labCategory.name}
-                                        </Link>
-                                      )
+                              <Link
+                                to={`/category/${category._id}/subcategory/${subcategory._id}`}
+                                className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span>{subcategory.name}</span>
+                                  {labCategories[subcategory._id] &&
+                                    labCategories[subcategory._id].length >
+                                      0 && (
+                                      <ChevronDown className="w-4 h-4 transform rotate-[-90deg]" />
                                     )}
-                                  </div>
                                 </div>
-                              )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                </div>
+                              </Link>
+
+                              {/* Lab Categories for subcategories */}
+                              {labCategories[subcategory._id] &&
+                                labCategories[subcategory._id].length > 0 && (
+                                  <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileHover={{ opacity: 1, x: 0 }}
+                                    className="absolute left-full top-0 ml-1 w-72 bg-white dark:bg-gray-800 shadow-xl rounded-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                                  >
+                                    <div className="p-2">
+                                      <h4 className="font-semibold text-[#703233] dark:text-[#973E42] px-2 py-1 text-sm border-b border-gray-200 dark:border-gray-600 mb-2">
+                                        {subcategory.name} Labs
+                                      </h4>
+                                      {labCategories[subcategory._id].map(
+                                        (labCategory) => (
+                                          <Link
+                                            key={labCategory._id}
+                                            to={`/category/${category._id}/subcategory/${subcategory._id}/labcategory/${labCategory._id}`}
+                                            className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 rounded"
+                                          >
+                                            <motion.span
+                                              whileHover={{ x: 5 }}
+                                              className="block"
+                                            >
+                                              {labCategory.name}
+                                            </motion.span>
+                                          </Link>
+                                        )
+                                      )}
+                                    </div>
+                                  </motion.div>
+                                )}
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
+                  </AnimatePresence>
+                </motion.div>
               ))}
 
-              <Link
-                to="/furniture"
-                onClick={() => setIsMenuOpen(false)}
-                className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
-                  location.pathname === "/furniture"
-                    ? "text-[#703233] dark:text-[#973E42]"
-                    : ""
-                }`}
-              >
-                Furniture
-              </Link>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="hidden md:flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm"
-                >
-                  <LogOut className="w-4 h-4 mr-1" />
-                  Logout
-                </button>
-              ) : (
-                <Link
-                  to="/login"
-                  className="hidden md:block bg-gray-800 dark:bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 font-medium text-sm"
-                >
-                  Login
-                </Link>
-              )}
-
-              <button
-                onClick={() => setIsTestRideModalOpen(true)}
-                className="hidden md:block bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
-              >
-                Contact Us
-              </button>
-
-              {/* Mobile theme toggle */}
-              <button
-                onClick={toggleTheme}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? (
-                  <Sun className="w-5 h-5 text-yellow-500" />
-                ) : (
-                  <Moon className="w-5 h-5 text-gray-600" />
-                )}
-              </button>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? (
-                  <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                ) : (
-                  <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
-              <nav className="flex flex-col space-y-4 px-10">
-                <Link
-                  to="/"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
-                    location.pathname === "/"
-                      ? "text-[#703233] dark:text-[#973E42]"
-                      : ""
-                  }`}
-                >
-                  Home
-                </Link>
-
-                {categories.map((category) => (
-                  <div key={category._id}>
-                    <Link
-                      to={`/category/${category._id}`}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
-                        location.pathname === `/category/${category._id}`
-                          ? "text-[#703233] dark:text-[#973E42]"
-                          : ""
-                      }`}
-                    >
-                      {category.name}
-                    </Link>
-
-                    {/* Mobile subcategories */}
-                    {subcategories[category._id] && (
-                      <div className="ml-4 mt-2 space-y-2">
-                        {subcategories[category._id].map((subcategory) => (
-                          <div key={subcategory._id}>
-                            <Link
-                              to={`/category/${category._id}/subcategory/${subcategory._id}`}
-                              onClick={() => setIsMenuOpen(false)}
-                              className="block text-sm text-gray-600 dark:text-gray-400 hover:text-[#703233] dark:hover:text-[#973E42] py-1"
-                            >
-                              {subcategory.name}
-                            </Link>
-
-                            {/* Mobile lab categories */}
-                            {labCategories[subcategory._id] &&
-                              labCategories[subcategory._id].length > 0 && (
-                                <div className="ml-4 mt-1 space-y-1">
-                                  {labCategories[subcategory._id].map(
-                                    (labCategory) => (
-                                      <Link
-                                        key={labCategory._id}
-                                        to={`/category/${category._id}/subcategory/${subcategory._id}/labcategory/${labCategory._id}`}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="block text-xs text-gray-500 dark:text-gray-500 hover:text-[#703233] dark:hover:text-[#973E42] py-1"
-                                      >
-                                        {labCategory.name}
-                                      </Link>
-                                    )
-                                  )}
-                                </div>
-                              )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-
+              <motion.div variants={itemVariants}>
                 <Link
                   to="/furniture"
                   onClick={() => setIsMenuOpen(false)}
@@ -391,45 +394,239 @@ const Header = () => {
                       : ""
                   }`}
                 >
-                  Furniture
+                  <motion.span whileHover={{ scale: 1.05 }} className="block">
+                    Furniture
+                  </motion.span>
                 </Link>
+              </motion.div>
+            </nav>
 
-                {/* Mobile login/logout button */}
-                {isLoggedIn ? (
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsMenuOpen(false);
-                    }}
-                    className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-all duration-200 font-medium mt-4"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Logout
-                  </button>
-                ) : (
+            <div className="flex items-center space-x-4">
+              {isLoggedIn ? (
+                <motion.button
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleLogout}
+                  className="hidden md:flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm"
+                >
+                  <LogOut className="w-4 h-4 mr-1" />
+                  Logout
+                </motion.button>
+              ) : (
+                <motion.div variants={itemVariants}>
                   <Link
                     to="/login"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 font-medium text-center mt-4"
+                    className="hidden md:block bg-gray-800 dark:bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 font-medium text-sm"
                   >
-                    Login
+                    <motion.span whileHover={{ scale: 1.05 }} className="block">
+                      Login
+                    </motion.span>
                   </Link>
-                )}
+                </motion.div>
+              )}
 
-                <button
-                  onClick={() => {
-                    setIsTestRideModalOpen(true);
-                    setIsMenuOpen(false);
-                  }}
-                  className="bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium mt-4"
-                >
-                  Contact Us
-                </button>
-              </nav>
+              <motion.button
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsTestRideModalOpen(true)}
+                className="hidden md:block bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
+              >
+                Contact Us
+              </motion.button>
+
+              {/* Mobile theme toggle */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleTheme}
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-yellow-500" />
+                ) : (
+                  <Moon className="w-5 h-5 text-gray-600" />
+                )}
+              </motion.button>
+
+              {/* Mobile menu button */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                )}
+              </motion.button>
             </div>
-          )}
+          </motion.div>
+
+          {/* Mobile Navigation */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                variants={mobileMenuVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700 overflow-hidden"
+              >
+                <motion.nav
+                  variants={containerVariants}
+                  className="flex flex-col space-y-4 px-10"
+                >
+                  <motion.div variants={mobileMenuItemVariants}>
+                    <Link
+                      to="/"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
+                        location.pathname === "/"
+                          ? "text-[#703233] dark:text-[#973E42]"
+                          : ""
+                      }`}
+                    >
+                      Home
+                    </Link>
+                  </motion.div>
+
+                  {categories.map((category) => (
+                    <motion.div
+                      key={category._id}
+                      variants={mobileMenuItemVariants}
+                    >
+                      <Link
+                        to={`/category/${category._id}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
+                          location.pathname === `/category/${category._id}`
+                            ? "text-[#703233] dark:text-[#973E42]"
+                            : ""
+                        }`}
+                      >
+                        {category.name}
+                      </Link>
+
+                      {/* Mobile subcategories */}
+                      {subcategories[category._id] && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          transition={{ duration: 0.3 }}
+                          className="ml-4 mt-2 space-y-2"
+                        >
+                          {subcategories[category._id].map((subcategory) => (
+                            <motion.div
+                              key={subcategory._id}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.1 }}
+                            >
+                              <Link
+                                to={`/category/${category._id}/subcategory/${subcategory._id}`}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="block text-sm text-gray-600 dark:text-gray-400 hover:text-[#703233] dark:hover:text-[#973E42] py-1"
+                              >
+                                {subcategory.name}
+                              </Link>
+
+                              {/* Mobile lab categories */}
+                              {labCategories[subcategory._id] &&
+                                labCategories[subcategory._id].length > 0 && (
+                                  <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    transition={{ duration: 0.3 }}
+                                    className="ml-4 mt-1 space-y-1"
+                                  >
+                                    {labCategories[subcategory._id].map(
+                                      (labCategory) => (
+                                        <motion.div
+                                          key={labCategory._id}
+                                          initial={{ opacity: 0, x: -20 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          transition={{ delay: 0.2 }}
+                                        >
+                                          <Link
+                                            to={`/category/${category._id}/subcategory/${subcategory._id}/labcategory/${labCategory._id}`}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="block text-xs text-gray-500 dark:text-gray-500 hover:text-[#703233] dark:hover:text-[#973E42] py-1"
+                                          >
+                                            {labCategory.name}
+                                          </Link>
+                                        </motion.div>
+                                      )
+                                    )}
+                                  </motion.div>
+                                )}
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  ))}
+
+                  <motion.div variants={mobileMenuItemVariants}>
+                    <Link
+                      to="/furniture"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`text-gray-700 dark:text-gray-300 hover:text-[#703233] dark:hover:text-[#973E42] transition-colors duration-200 font-medium py-2 ${
+                        location.pathname === "/furniture"
+                          ? "text-[#703233] dark:text-[#973E42]"
+                          : ""
+                      }`}
+                    >
+                      Furniture
+                    </Link>
+                  </motion.div>
+
+                  {/* Mobile login/logout button */}
+                  {isLoggedIn ? (
+                    <motion.button
+                      variants={mobileMenuItemVariants}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-all duration-200 font-medium mt-4"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </motion.button>
+                  ) : (
+                    <motion.div variants={mobileMenuItemVariants}>
+                      <Link
+                        to="/login"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 font-medium text-center mt-4 block"
+                      >
+                        Login
+                      </Link>
+                    </motion.div>
+                  )}
+
+                  <motion.button
+                    variants={mobileMenuItemVariants}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setIsTestRideModalOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium mt-4"
+                  >
+                    Contact Us
+                  </motion.button>
+                </motion.nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </header>
+      </motion.header>
 
       <TestRideModal
         isOpen={isTestRideModalOpen}

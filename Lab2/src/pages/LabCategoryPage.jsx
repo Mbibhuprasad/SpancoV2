@@ -20,7 +20,7 @@ export default function LabCategoryPage() {
   // Fetch category details
   useEffect(() => {
     if (categoryId) {
-      fetch(`http://localhost:5000/api/categories/${categoryId}`)
+      fetch(`${import.meta.env.VITE_BACKEND_URI}/categories/${categoryId}`)
         .then((res) => res.json())
         .then((data) => {
           setCategory(data);
@@ -33,7 +33,9 @@ export default function LabCategoryPage() {
   // Fetch lab category details
   useEffect(() => {
     if (labCategoryId) {
-      fetch(`http://localhost:5000/api/labcategories/${labCategoryId}`)
+      fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/labcategories/${labCategoryId}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setLabCategory(data);
@@ -45,7 +47,11 @@ export default function LabCategoryPage() {
   // Fetch subcategories for this category
   useEffect(() => {
     if (categoryId) {
-      fetch(`http://localhost:5000/api/subcategories/category/${categoryId}`)
+      fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URI
+        }/subcategories/category/${categoryId}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setSubcategories(data);
@@ -58,7 +64,11 @@ export default function LabCategoryPage() {
   useEffect(() => {
     setIsLoading(true);
     if (labCategoryId) {
-      fetch(`http://localhost:5000/api/products/labcategory/${labCategoryId}`)
+      fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URI
+        }/products/labcategory/${labCategoryId}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {

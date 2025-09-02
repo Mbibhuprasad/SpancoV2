@@ -17,7 +17,7 @@ export default function SubcategoryProductsPage() {
     const fetchSubcategory = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/subcategories/${subcategoryId}`
+          `${import.meta.env.VITE_BACKEND_URI}/subcategories/${subcategoryId}`
         );
         setSubcategory(res.data);
       } catch (err) {
@@ -33,7 +33,9 @@ export default function SubcategoryProductsPage() {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/products/subcategory/${subcategoryId}?page=${page}&limit=${limit}`
+          `${
+            import.meta.env.VITE_BACKEND_URI
+          }/products/subcategory/${subcategoryId}?page=${page}&limit=${limit}`
         );
         if (res.data.success) {
           setProducts(res.data.data);

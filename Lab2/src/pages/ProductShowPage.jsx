@@ -22,7 +22,7 @@ export default function ProductShowPage() {
   useEffect(() => {
     // Fetch Category details
     if (categoryId) {
-      fetch(`http://localhost:5000/api/categories/${categoryId}`)
+      fetch(`${import.meta.env.VITE_BACKEND_URI}/categories/${categoryId}`)
         .then((res) => res.json())
         .then((data) => setCategory(data))
         .catch((err) => console.error("Error fetching category:", err));
@@ -30,7 +30,11 @@ export default function ProductShowPage() {
 
     // Fetch Subcategories for the current category
     if (categoryId) {
-      fetch(`http://localhost:5000/api/subcategories/category/${categoryId}`)
+      fetch(
+        `${
+          import.meta.env.VITE_BACKEND_URI
+        }/subcategories/category/${categoryId}`
+      )
         .then((res) => res.json())
         .then((data) => setSubcategories(data))
         .catch((err) => console.error("Error fetching subcategories:", err));
@@ -39,7 +43,9 @@ export default function ProductShowPage() {
     // Fetch Lab Categories for the current subcategory
     if (subcategoryId) {
       fetch(
-        `http://localhost:5000/api/labcategories/subcategory/${subcategoryId}`
+        `${
+          import.meta.env.VITE_BACKEND_URI
+        }/labcategories/subcategory/${subcategoryId}`
       )
         .then((res) => res.json())
         .then((data) => setLabCategories(data))
@@ -48,7 +54,9 @@ export default function ProductShowPage() {
 
     // Fetch Lab Category details
     if (labCategoryId) {
-      fetch(`http://localhost:5000/api/labcategories/${labCategoryId}`)
+      fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/labcategories/${labCategoryId}`
+      )
         .then((res) => res.json())
         .then((data) => setLabCategory(data))
         .catch((err) => console.error("Error fetching lab category:", err));
@@ -61,13 +69,19 @@ export default function ProductShowPage() {
     let url = "";
 
     if (labCategoryId) {
-      url = `http://localhost:5000/api/products/labcategory/${labCategoryId}`;
+      url = `${
+        import.meta.env.VITE_BACKEND_URI
+      }/products/labcategory/${labCategoryId}`;
     } else if (subcategoryId) {
-      url = `http://localhost:5000/api/products/subcategory/${subcategoryId}`;
+      url = `${
+        import.meta.env.VITE_BACKEND_URI
+      }/products/subcategory/${subcategoryId}`;
     } else if (categoryId) {
-      url = `http://localhost:5000/api/products/category/${categoryId}`;
+      url = `${
+        import.meta.env.VITE_BACKEND_URI
+      }/products/category/${categoryId}`;
     } else {
-      url = "http://localhost:5000/api/products"; // Fallback to all products
+      url = `${import.meta.env.VITE_BACKEND_URI}/products`; // Fallback to all products
     }
 
     fetch(url)
@@ -188,7 +202,7 @@ export default function ProductShowPage() {
         {/* Sidebar Toggle Button */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="fixed top-1/2 left-4 z-30 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:scale-110"
+          className="fixed top-1/2 left-4 z-30 bg-white dark:bg-gray-800 p-2 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:scale-110"
         >
           {isSidebarOpen ? (
             <ChevronLeft className="w-5 h-5" />
@@ -222,7 +236,7 @@ export default function ProductShowPage() {
                   {/* All Products Button */}
                   <button
                     onClick={() => navigate(`/category/${categoryId}`)}
-                    className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 ${
+                    className={`px-6 py-2 rounded-md font-semibold transition-all duration-200 ${
                       !subcategoryId && !labCategoryId
                         ? "bg-gradient-to-r from-[#703233] to-[#973E42] text-white shadow-lg"
                         : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
@@ -236,7 +250,7 @@ export default function ProductShowPage() {
                     <div key={sub._id} className="mb-4">
                       <button
                         onClick={() => handleSubcategoryClick(sub._id)}
-                        className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 w-full text-left ${
+                        className={`px-6 py-2 rounded-md font-semibold transition-all duration-200 w-full text-left ${
                           subcategoryId === sub._id
                             ? "bg-gradient-to-r from-[#703233] to-[#973E42] text-white shadow-lg"
                             : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
@@ -252,7 +266,7 @@ export default function ProductShowPage() {
                               <button
                                 key={lab._id}
                                 onClick={() => handleLabCategoryClick(lab._id)}
-                                className={`px-6 py-2 rounded-full text-sm transition-all duration-200 w-full text-left ${
+                                className={`px-6 py-2 rounded-md text-sm transition-all duration-200 w-full text-left ${
                                   labCategoryId === lab._id
                                     ? "bg-gradient-to-r from-[#703233] to-[#973E42] text-white shadow-lg"
                                     : "bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500"

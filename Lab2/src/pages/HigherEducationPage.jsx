@@ -16,7 +16,7 @@ export default function ProductOnLabCategories() {
     const getLabcategories = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/labcategories/${labCategoryId}`
+          `${import.meta.env.VITE_BACKEND_URI}/labcategories/${labCategoryId}`
         );
         setLabCategory(res.data);
       } catch (error) {
@@ -31,7 +31,9 @@ export default function ProductOnLabCategories() {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/products/labcategory/${labCategoryId}?page=${page}&limit=${limit}`
+          `${
+            import.meta.env.VITE_BACKEND_URI
+          }/products/labcategory/${labCategoryId}?page=${page}&limit=${limit}`
         );
         if (res.data.success) {
           setProducts(res.data.data);

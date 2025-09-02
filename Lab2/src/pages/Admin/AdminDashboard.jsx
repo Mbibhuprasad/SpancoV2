@@ -48,7 +48,7 @@ export default function AdminPanel() {
   }, []);
 
   const fetchCategories = () => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${import.meta.env.VITE_BACKEND_URI}/categories`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
@@ -56,7 +56,7 @@ export default function AdminPanel() {
   };
 
   const fetchSubcategories = () => {
-    fetch("http://localhost:5000/api/subcategories")
+    fetch(`${import.meta.env.VITE_BACKEND_URI}/subcategories`)
       .then((res) => res.json())
       .then((data) => {
         setSubcategories(data);
@@ -64,18 +64,18 @@ export default function AdminPanel() {
   };
 
   const fetchLabCategories = () => {
-    fetch("http://localhost:5000/api/labcategories")
+    fetch(`${import.meta.env.VITE_BACKEND_URI}/labcategories`)
       .then((res) => res.json())
       .then((data) => setLabCategories(data));
   };
 
   const fetchProducts = () => {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${import.meta.env.VITE_BACKEND_URI}/products`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('data.data',data.data)
-        setProducts(data.data)
-  });
+        console.log("data.data", data.data);
+        setProducts(data.data);
+      });
   };
 
   // Filter subcategories when category changes in lab category form
@@ -94,7 +94,9 @@ export default function AdminPanel() {
   useEffect(() => {
     if (productForm.category) {
       fetch(
-        `http://localhost:5000/api/subcategories/category/${productForm.category}`
+        `${import.meta.env.VITE_BACKEND_URI}/subcategories/category/${
+          productForm.category
+        }`
       )
         .then((res) => res.json())
         .then((data) => setSubcategories(data));
@@ -105,7 +107,9 @@ export default function AdminPanel() {
   useEffect(() => {
     if (productForm.subCategory) {
       fetch(
-        `http://localhost:5000/api/labcategories/subcategory/${productForm.subCategory}`
+        `${import.meta.env.VITE_BACKEND_URI}/labcategories/subcategory/${
+          productForm.subCategory
+        }`
       )
         .then((res) => res.json())
         .then((data) => setLabCategories(data));
@@ -116,7 +120,7 @@ export default function AdminPanel() {
 
   const handleViewProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URI}/products`);
       const data = await res.json();
       setProducts(data);
       console.log(products);
@@ -146,13 +150,16 @@ export default function AdminPanel() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/categories`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       const result = await res.json();
       if (res.ok) {
@@ -175,18 +182,21 @@ export default function AdminPanel() {
   const handleSubcategorySubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/subcategories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: subcategoryForm.name,
-          description: subcategoryForm.description,
-          parentCategories: subcategoryForm.parentCategories,
-        }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/subcategories`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: subcategoryForm.name,
+            description: subcategoryForm.description,
+            parentCategories: subcategoryForm.parentCategories,
+          }),
+        }
+      );
 
       const result = await res.json();
       if (res.ok) {
@@ -209,18 +219,21 @@ export default function AdminPanel() {
   const handleLabCategorySubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/labcategories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: labCategoryForm.name,
-          description: labCategoryForm.description,
-          parentSubcategory: labCategoryForm.parentSubcategory,
-        }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/labcategories`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: labCategoryForm.name,
+            description: labCategoryForm.description,
+            parentSubcategory: labCategoryForm.parentSubcategory,
+          }),
+        }
+      );
 
       const result = await res.json();
       if (res.ok) {
@@ -277,7 +290,7 @@ export default function AdminPanel() {
     );
 
     try {
-      const res = await fetch("http://localhost:5000/api/products", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URI}/products`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
