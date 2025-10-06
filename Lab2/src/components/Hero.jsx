@@ -386,26 +386,7 @@ const Hero = () => {
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-20"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Choose Your Perfect Lab
-          </h2>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 96 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className={`h-1 bg-gradient-to-r ${currentLab.gradient} mx-auto rounded-full`}
-          ></motion.div>
-          <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
-            From Physics to Biology, find the laboratory that matches your
-            curiosity and passion for science.
-          </p>
-        </motion.div>
+       
       </section>
 
       {/* Video Modal */}

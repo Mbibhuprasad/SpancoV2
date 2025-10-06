@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { X, User, Phone, Mail, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,24 +23,36 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    emailjs
+      .sendForm(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        formRef.current,
+        "YOUR_PUBLIC_KEY"
+      )
+      .then(
+        () => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
 
-      // Auto close after a short delay and reset form
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
-        onClose();
-      }, 3000);
-    }, 1200);
+          setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+              name: "",
+              email: "",
+              phone: "",
+              subject: "",
+              message: "",
+            });
+            onClose();
+          }, 3000);
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          setIsSubmitting(false);
+          alert("Failed to send message. Please try again later.");
+        }
+      );
   };
 
   return (
@@ -119,7 +133,6 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                 </motion.div>
               ) : (
                 <>
-                  {/* Info / Note */}
                   <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -135,6 +148,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
 
                   {/* Form */}
                   <motion.form
+                    ref={formRef}
                     onSubmit={handleSubmit}
                     className="space-y-4"
                     initial={{ opacity: 0 }}
@@ -153,7 +167,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                           required
                         />
                       </div>
@@ -169,7 +183,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                           required
                         />
                       </div>
@@ -187,7 +201,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                           placeholder="Optional"
                         />
                       </div>
@@ -202,7 +216,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                           name="subject"
                           value={formData.subject}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                           required
                         />
                       </div>
@@ -219,7 +233,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                         onChange={handleInputChange}
                         rows="4"
                         placeholder="Write your message..."
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#973E42] bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
                         required
                       ></motion.textarea>
                     </div>
@@ -230,7 +244,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                         onClick={onClose}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="flex-1 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 font-semibold"
+                        className="flex-1 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 font-semibold"
                       >
                         Cancel
                       </motion.button>
@@ -239,7 +253,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                         disabled={isSubmitting}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="flex-1 bg-gradient-to-r from-[#703233] to-[#973E42] text-white py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-semibold flex items-center justify-center space-x-2 disabled:opacity-50"
+                        className="flex-1 bg-gradient-to-r from-[#703233] to-[#973E42] text-white py-3 rounded-lg hover:shadow-lg font-semibold flex items-center justify-center space-x-2 disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

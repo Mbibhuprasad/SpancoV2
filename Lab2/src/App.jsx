@@ -22,12 +22,14 @@ import ProductOnLabCategories from "./pages/HigherEducationPage";
 import SubcategoryProductsPage from "./pages/SubcategoryProductsPage";
 
 import ProductShowPage from "./pages/ProductShowPage";
+import AboutSection from "./components/AboutSection";
 
 const HomePage = () => (
   <>
     <Hero />
     <BikeCollection />
     <Accessories />
+    <AboutSection />
     <Testimonials />
     <Newsletter />
   </>

@@ -217,7 +217,7 @@ const Header = () => {
               >
                 <Phone className="w-4 h-4 text-white" />
                 <span className="text-white dark:text-gray-300">
-                  +91 9876543210
+                  +91 9338273911
                 </span>
               </motion.div>
               <motion.div
@@ -226,7 +226,7 @@ const Header = () => {
               >
                 <Mail className="w-4 h-4 text-white" />
                 <span className="text-white dark:text-gray-300">
-                  info@spancotek.com
+                  spancotek@gmail.com
                 </span>
               </motion.div>
             </div>
@@ -402,7 +402,7 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center space-x-4">
-              {isLoggedIn ? (
+              {/* {isLoggedIn ? (
                 <motion.button
                   variants={itemVariants}
                   whileHover={{ scale: 1.05 }}
@@ -424,7 +424,7 @@ const Header = () => {
                     </motion.span>
                   </Link>
                 </motion.div>
-              )}
+              )} */}
 
               <motion.button
                 variants={itemVariants}
@@ -585,7 +585,7 @@ const Header = () => {
                   </motion.div>
 
                   {/* Mobile login/logout button */}
-                  {isLoggedIn ? (
+                  {/* {isLoggedIn ? (
                     <motion.button
                       variants={mobileMenuItemVariants}
                       whileTap={{ scale: 0.95 }}
@@ -608,7 +608,7 @@ const Header = () => {
                         Login
                       </Link>
                     </motion.div>
-                  )}
+                  )} */}
 
                   <motion.button
                     variants={mobileMenuItemVariants}
