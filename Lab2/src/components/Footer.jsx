@@ -218,7 +218,7 @@ const Footer = () => {
                 className="flex items-center space-x-3"
               >
                 <Phone className="w-5 h-5 text-[#703233]" />
-                <span className="text-gray-400">+91 9876543210</span>
+                <span className="text-gray-400">+91 9338273911</span>
               </motion.div>
               <motion.div
                 variants={childVariants}

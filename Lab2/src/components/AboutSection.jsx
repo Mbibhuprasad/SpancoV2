@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
-    <section className="relative py-12 md:py-16 overflow-hidden bg-white">
+    <section className="relative py-12 md:py-16 overflow-hidden">
       {/* Bottom Gradient Border */}
       <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-[#703233] to-[#973E42]" />
 
