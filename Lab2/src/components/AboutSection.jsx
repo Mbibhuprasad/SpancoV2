@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 
 const AboutSection = () => {
+  const { isDarkMode } = useTheme();
   return (
     <section className="relative py-12 md:py-16 overflow-hidden">
       {/* Bottom Gradient Border */}
@@ -16,18 +18,30 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="flex-1 text-center md:text-left"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6">
+          <h2
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 ${
+              isDarkMode ? "text-white" : "text-gray-700"
+            }`}
+          >
             About <span className="text-[#973E42]">Spanco Tek</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-3 sm:mb-4">
+          <p
+            className={`text-base sm:text-lg text-gray-700 leading-relaxed mb-3 sm:mb-4 ${
+              isDarkMode ? "text-white" : "text-gray-700"
+            }`}
+          >
             Spanco Tek is a trusted leader in the design and supply of advanced
             laboratory equipment. We provide innovative and reliable lab
             solutions that empower educational institutions, research centers,
             and industries to achieve precise and efficient results.
           </p>
 
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-5 sm:mb-6">
+          <p
+            className={`text-base sm:text-lg text-gray-700 leading-relaxed mb-5 sm:mb-6 ${
+              isDarkMode ? "text-white" : "text-gray-700"
+            }`}
+          >
             Our commitment to excellence, precision, and quality assurance has
             made us one of the most preferred partners in laboratory
             development. From school labs to professional research facilities,

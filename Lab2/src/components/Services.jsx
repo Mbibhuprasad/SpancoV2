@@ -33,7 +33,9 @@ const ServicesCollection = () => {
 
   return (
     <section
-      className={`py-12 sm:py-16 ${isDarkMode ? "bg-gray-800" : "bg-gray-50"}`}
+      className={`py-12 sm:py-16 ${
+        isDarkMode ? "bg-gray-800" : "bg-gray-50"
+      }  `}
     >
       {/* Lower Section */}
       <section className="relative py-8 sm:py-10 overflow-hidden">
@@ -48,18 +50,28 @@ const ServicesCollection = () => {
             viewport={{ once: true }}
             className="flex-1 text-center md:text-left"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6">
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 ${
+              isDarkMode ? "text-white" : "text-gray-700"
+            }`}>
               Our <span className="text-[#703233]">Services</span>
             </h2>
 
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
+            <p
+              className={`text-base sm:text-lg leading-relaxed mb-4 ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
+            >
               At <span className="font-semibold">Spanco Tek</span>, we deliver
               complete laboratory solutions — from concept to commissioning. Our
               expert team provides high-quality equipment, installation, and
               technical support tailored to your institution’s needs.
             </p>
 
-            <ul className="list-disc list-inside text-gray-700 text-sm sm:text-lg mb-6 space-y-2 text-left">
+            <ul
+              className={`list-disc list-inside text-sm sm:text-lg mb-6 space-y-2 text-left ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
+            >
               <li>
                 <strong>Turnkey Lab Setup:</strong> End-to-end lab establishment
                 for schools, colleges, and research centers.

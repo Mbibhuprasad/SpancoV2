@@ -242,37 +242,6 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Services */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="border-t border-gray-800 mt-12 pt-8"
-        >
-          <h3 className="text-lg font-bold mb-6 text-center">Our Services</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {services.map((service, index) => (
-              <motion.a
-                key={service}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#973E42",
-                  transition: { duration: 0.2 },
-                }}
-                href="#"
-                className="text-center p-4 bg-gray-800 rounded-lg hover:bg-[#973E42] transition-colors duration-200 text-sm"
-              >
-                {service}
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Bottom Bar */}
         <motion.div
           initial={{ opacity: 0 }}
