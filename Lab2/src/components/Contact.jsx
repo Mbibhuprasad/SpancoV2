@@ -25,10 +25,10 @@ const ContactUsModal = ({ isOpen, onClose }) => {
 
     emailjs
       .sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_u4c0bqh",
+        "template_yimbmm3",
         formRef.current,
-        "YOUR_PUBLIC_KEY"
+        "bMQ3rwQAwD04bqKMz"
       )
       .then(
         () => {
