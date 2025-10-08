@@ -6,21 +6,25 @@ const CertificationPage = () => {
   const { isDarkMode } = useTheme();
 
   const certifications = [
-    { id: 1, img: "/cert1.png", title: "ISO 9001:2015 Certified" },
+    {
+      id: 1,
+      img: "/cert1.png",
+      title: "CE Marking Compliance ",
+    },
     {
       id: 2,
       img: "/Screenshot 2025-10-06 164723.png",
-      title: "CE Marking Compliance",
+      title: "ISO 9001:2015 Certified",
     },
     {
       id: 3,
       img: "/Screenshot 2025-10-06 164750.png",
-      title: "Bureau of Indian Standards (BIS)",
+      title: "Intellctual property India",
     },
     {
       id: 4,
       img: "/WhatsApp Image 2025-10-06 at 16.26.51_04c3188e.jpg",
-      title: "Educational Department Approved",
+      title: "Government Purchace Enlistment Certificate",
     },
     {
       id: 5,

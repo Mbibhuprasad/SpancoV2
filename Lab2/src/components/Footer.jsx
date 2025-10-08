@@ -7,18 +7,31 @@ import {
   Phone,
   Mail,
   MapPin,
+  Contrast,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
-  const quickLinks = [
-    "Home",
-    "Enggineering",
-    "Higher Education",
-    "School",
-    "Skill Development",
-    "Furniture",
+  const links = [
+    { name: "Home", path: "/" },
+    {
+      name: "Engineering",
+      path: "/category/685654c724fcdf9bc9956bfa/subcategory/689585ae3e5961e536578f14",
+    },
+    {
+      name: "Physics",
+      path: "/category/685654c724fcdf9bc9956bfb/subcategory/68565b29eacf08bd2d2e3c96",
+    },
+    {
+      name: "School",
+      path: "/category/685654c724fcdf9bc9956bfc/subcategory/68b40c1920a594d2c7d8ebed",
+    },
+    {
+      name: "Heating And Cooling",
+      path: "/category/685654c724fcdf9bc9956bfb/subcategory/68b408a720a594d2c7d8ebe8/labcategory/68b5406e01a72c7e60be31b1",
+    },
   ];
+
   const categories = [
     "Laboratory Instruments",
     "Glassware",
@@ -154,7 +167,6 @@ const Footer = () => {
               </motion.a>
             </div>
           </motion.div>
-
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6">Quick Links</h3>
@@ -165,45 +177,20 @@ const Footer = () => {
               viewport={{ once: true }}
               className="space-y-3"
             >
-              {quickLinks.map((link, index) => (
-                <motion.li key={link} variants={childVariants}>
+              {links.map((link, index) => (
+                <motion.li key={link.path} variants={childVariants}>
                   <motion.a
                     whileHover={{ x: 5, color: "#973E42" }}
-                    href={`#${link.toLowerCase().replace(" ", "-")}`}
+                    href={link.path}
                     className="text-gray-400 hover:text-[#973E42] transition-colors duration-200 block"
                   >
-                    {link}
+                    {link.name}
                   </motion.a>
                 </motion.li>
               ))}
             </motion.ul>
           </motion.div>
 
-          {/* Categories */}
-          <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-bold mb-6">Categories</h3>
-            <motion.ul
-              variants={staggerChildren}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="space-y-3"
-            >
-              {categories.map((category) => (
-                <motion.li key={category} variants={childVariants}>
-                  <motion.a
-                    whileHover={{ x: 5, color: "#973E42" }}
-                    href="#"
-                    className="text-gray-400 hover:text-[#973E42] transition-colors duration-200 block"
-                  >
-                    {category}
-                  </motion.a>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-
-          {/* Contact Info */}
           <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6">Contact Info</h3>
             <motion.div
