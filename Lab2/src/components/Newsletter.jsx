@@ -26,11 +26,11 @@ const CertificationPage = () => {
       img: "/WhatsApp Image 2025-10-06 at 16.26.51_04c3188e.jpg",
       title: "Government Purchace Enlistment Certificate",
     },
-    {
-      id: 5,
-      img: "/Screenshot 2025-10-06 164723.png",
-      title: "Lab Development Certification",
-    },
+    // {
+    //   id: 5,
+    //   img: "/Screenshot 2025-10-06 164723.png",
+    //   title: "Lab Development Certification",
+    // },
   ];
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -43,7 +43,7 @@ const CertificationPage = () => {
       viewport={{ once: true }}
       className={`py-16 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -68,7 +68,7 @@ const CertificationPage = () => {
         </motion.div>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.id}

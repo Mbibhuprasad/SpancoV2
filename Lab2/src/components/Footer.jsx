@@ -237,7 +237,10 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="border-t border-gray-800 mt-12 pt-8 text-center"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <motion.p whileHover={{ scale: 1.02 }} className="text-gray-400">
+            © 2025 Spancotek. All rights reserved.
+          </motion.p>
+          {/* <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <motion.p whileHover={{ scale: 1.02 }} className="text-gray-400">
               © 2025 Spancotek. All rights reserved.
             </motion.p>
@@ -264,7 +267,7 @@ const Footer = () => {
                 Cookie Policy
               </motion.a>
             </div>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </motion.footer>
