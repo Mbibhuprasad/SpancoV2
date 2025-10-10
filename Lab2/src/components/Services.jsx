@@ -1,46 +1,45 @@
 import React from "react";
-import { Info, X, Heart, Eye } from "lucide-react";
-import { useTheme } from "../context/ThemeContext"; // Import the ThemeContext
+import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 
 const ServicesCollection = () => {
-  const { isDarkMode } = useTheme(); // Access theme context
-  const [selectedService, setSelectedService] = React.useState(null);
+  const { isDarkMode } = useTheme();
 
-  // Example services array
   const services = [
     {
-      icon: <Info />,
-      title: "Consultation",
-      description: "Expert advice for your laboratory needs.",
+      image:
+        "https://crlinterior.com/wp-content/uploads/2025/01/laboratory-quality.jpg",
+      title: "Turnkey Lab Setup",
+      description:
+        "End-to-end lab establishment for schools, colleges, and research centers.",
     },
     {
-      icon: <X />,
-      title: "Testing",
-      description: "Comprehensive testing services for all requirements.",
+      image:
+        "https://www.laboratorydeal.com/cdn/shop/products/school-science-lab-equipment-suppliers-in-india-Sc-1084.jpg?v=1737145971&width=1000",
+      title: "Equipment Supply",
+      description:
+        "Reliable, certified instruments for physics, chemistry, biology, and engineering labs.",
     },
     {
-      icon: <Heart />,
-      title: "Support",
-      description: "Ongoing support and maintenance for your lab.",
+      image: "https://labtesting.com/wp-content/uploads/force-callibration.jpg",
+      title: "Calibration & Maintenance",
+      description:
+        "Regular inspection, servicing, and performance checks for all instruments.",
     },
     {
-      icon: <Eye />,
-      title: "Training",
-      description: "Hands-on training for staff and students.",
+      image: "https://tiimg.tistatic.com/fp/1/004/240/testing-lab-747.jpg",
+      title: "Custom Solutions",
+      description:
+        "Tailored lab designs for unique educational and research requirements.",
     },
   ];
 
   return (
     <section
-      className={`py-12 sm:py-16 ${
-        isDarkMode ? "bg-gray-800" : "bg-gray-50"
-      }  `}
+      className={`py-12 sm:py-16 ${isDarkMode ? "bg-gray-800" : "bg-gray-50"}`}
     >
-      {/* Lower Section */}
-      <section className="relative py-8 sm:py-10 overflow-hidden">
-        {/* Bottom Gradient Line */}
-
+      {/* Upper Section with Image and Text */}
+      <section className="relative py-4 sm:py-4 overflow-hidden">
         <div className="max-w-[90%] sm:max-w-[82%] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
           {/* Left Content */}
           <motion.div
@@ -50,46 +49,24 @@ const ServicesCollection = () => {
             viewport={{ once: true }}
             className="flex-1 text-center md:text-left"
           >
-            <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6 ${
-              isDarkMode ? "text-white" : "text-gray-700"
-            }`}>
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-8 ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
+            >
               Our <span className="text-[#703233]">Services</span>
             </h2>
 
             <p
-              className={`text-base sm:text-lg leading-relaxed mb-4 ${
+              className={`text-base sm:text-lg leading-relaxed mb-6 ${
                 isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
               At <span className="font-semibold">Spanco Tek</span>, we deliver
               complete laboratory solutions — from concept to commissioning. Our
               expert team provides high-quality equipment, installation, and
-              technical support tailored to your institution’s needs.
+              technical support tailored to your institution's needs.
             </p>
-
-            <ul
-              className={`list-disc list-inside text-sm sm:text-lg mb-6 space-y-2 text-left ${
-                isDarkMode ? "text-white" : "text-gray-700"
-              }`}
-            >
-              <li>
-                <strong>Turnkey Lab Setup:</strong> End-to-end lab establishment
-                for schools, colleges, and research centers.
-              </li>
-              <li>
-                <strong>Equipment Supply:</strong> Reliable, certified
-                instruments for physics, chemistry, biology, and engineering
-                labs.
-              </li>
-              <li>
-                <strong>Calibration & Maintenance:</strong> Regular inspection,
-                servicing, and performance checks for all instruments.
-              </li>
-              <li>
-                <strong>Custom Solutions:</strong> Tailored lab designs for
-                unique educational and research requirements.
-              </li>
-            </ul>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -116,24 +93,26 @@ const ServicesCollection = () => {
               <img
                 src="https://kraftwerks.net/wp-content/uploads/2024/02/UB-Renew-Service-Fittings.jpeg"
                 alt="Spanco Tek Services"
-                className="w-full h-[250px] sm:h-[350px] md:h-[400px] object-cover rounded-xl"
+                className="w-full h-[200px] sm:h-[300px] md:h-[280px] object-cover rounded-xl"
               />
             </motion.div>
           </motion.div>
         </div>
       </section>
+
+      {/* Lower Section with 4 Cards */}
       <div className="max-w-[90%] sm:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-12">
           <h2
-            className={`text-2xl sm:text-3xl md:text-4xl font-bold ${
+            className={`text-2xl sm:text-2xl md:text-3xl font-bold ${
               isDarkMode ? "text-white" : "text-gray-900"
             } mb-3 sm:mb-4`}
           >
-            Our Services
+            What We Offer
           </h2>
           <p
-            className={`text-base sm:text-lg md:text-xl ${
+            className={`text-base sm:text-lg md:text-lg ${
               isDarkMode ? "text-gray-300" : "text-gray-600"
             } max-w-3xl mx-auto`}
           >
@@ -142,39 +121,57 @@ const ServicesCollection = () => {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* Services Grid - 4 Cards with Circular Images */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`p-5 sm:p-6 rounded-lg shadow-md transition-all duration-300 ${
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.3 },
+              }}
+              className={`p-4 sm:p-4 rounded-xl shadow-lg transition-all duration-300 border flex flex-col items-center ${
                 isDarkMode
-                  ? "bg-gray-900 text-gray-300 hover:shadow-lg hover:bg-gray-800"
-                  : "bg-white text-gray-900 hover:shadow-lg"
+                  ? "bg-gray-900 text-gray-300 hover:shadow-xl hover:bg-gray-800 border-gray-700"
+                  : "bg-white text-gray-900 hover:shadow-xl border-gray-200"
               }`}
             >
-              <div
-                className={`${
-                  isDarkMode ? "text-[#973E42]" : "text-[#703233]"
-                } mb-3 sm:mb-4 text-2xl sm:text-3xl`}
+              {/* Circular Image Container */}
+              <motion.div
+                className="w-20 h-20 sm:w-24 sm:h-24 mb-6 rounded-full overflow-hidden border-4 border-[#703233]"
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 5,
+                  transition: { duration: 0.3 },
+                }}
               >
-                {service.icon}
-              </div>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+
+              {/* Service Content */}
               <h3
-                className={`text-lg sm:text-xl font-semibold ${
+                className={`text-xl sm:text-2xl font-bold text-center ${
                   isDarkMode ? "text-white" : "text-gray-900"
-                } mb-2 sm:mb-3`}
+                } mb-4`}
               >
                 {service.title}
               </h3>
               <p
-                className={`${
+                className={`text-center ${
                   isDarkMode ? "text-gray-400" : "text-gray-600"
-                } text-sm sm:text-base`}
+                } text-sm sm:text-base leading-relaxed`}
               >
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

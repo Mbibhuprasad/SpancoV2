@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const OurClients = () => {
-  const clients = [
+  const odsclients = [
     {
       id: 1,
       name: "Nabadwip vidyasagar college ",
@@ -44,16 +44,74 @@ const OurClients = () => {
       logo: "https://upload.wikimedia.org/wikipedia/en/9/92/Gokhale_Memorial_Girls%27_College.gif",
     },
     {
+      id: 1,
+      name: "University of Delhi  MIRANDA HOUSE ",
+      logo: "https://www.mirandahouse.ac.in/images/mhud_logo1.png",
+    },
+    {
+      id: 2,
+      name: "Birla Institute Of Technology,Mesra",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Birla_Institute_of_Technology_Mesra.png/250px-Birla_Institute_of_Technology_Mesra.png",
+    },
+  ];
+  const ofdclients = [
+    {
+      id: 1,
+      name: "Indian Institute of Science & Education Research (IISER)",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/IISER-Mohali_Logo.svg/1200px-IISER-Mohali_Logo.svg.png",
+    },
+    {
+      id: 2,
+      name: "National Institute Science & Education Research (NISER)",
+      logo: "https://upload.wikimedia.org/wikipedia/en/5/54/National_Institute_of_Science_Education_and_Research.svg",
+    },
+    {
+      id: 3,
+      name: "Indian Institute of Technology (IIT), Bhubaneswar",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Indian_Institute_of_Technology_Bhubaneswar_Logo.svg/1200px-Indian_Institute_of_Technology_Bhubaneswar_Logo.svg.png",
+    },
+    {
+      id: 4,
+      name: "Siksha 'O' Anusandhan University (SOA)",
+      logo: "https://upload.wikimedia.org/wikipedia/en/c/c5/Siksha_%E2%80%98O%E2%80%99_Anusandhan.png",
+    },
+    {
+      id: 5,
+      name: "Berhampur University",
+      logo: "https://upload.wikimedia.org/wikipedia/en/7/74/Berhampur-University_Logo.png",
+    },
+    {
+      id: 6,
+      name: "Ravenshaw University",
+      logo: "https://upload.wikimedia.org/wikipedia/en/0/09/Ravenshaw_University_Logo.png ",
+    },
+    {
+      id: 7,
+      name: "Centurian University",
+      logo: "https://upload.wikimedia.org/wikipedia/en/6/62/Centurion_University_of_Technology_and_Management_Logo.svg",
+    },
+    {
+      id: 8,
+      name: "Sri Sri University",
+      logo: "https://www.srisriuniversity.edu.in/images/logo.png",
+    },
+    {
       id: 9,
-      name: "Utkal Univercity",
-      logo: "https://cdn.imgbin.com/13/15/6/imgbin-utkal-university-of-culture-national-institute-of-science-education-and-research-vani-vihar-university-department-of-teacher-education-udte-teacher-1ZB1FUuYdKf3dPVfZuCxSF235.jpg",
+      name: "Veer Surendra Sai University Of Technology (VSSUT)",
+      logo: "https://vssut.ac.in/images/logo.png",
     },
     {
       id: 10,
-      name: "Kalinga-Institute-of-Industrial-Technology",
-      logo: "https://icon2.cleanpng.com/20180428/lyw/kisspng-kalinga-institute-of-industrial-technology-entranc-5ae4656eb5c3a0.9424063815249176147445.jpg",
+      name: "Sambalpur University Inst. Of Info. Tech (SUIIT)",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Suiit_logo.png",
+    },
+    {
+      id: 11,
+      name: "UTKAL UNIVERSITY",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/7/73/UU_LOGO.png",
     },
   ];
+
   const clientcert = [
     {
       id: 1,
@@ -75,16 +133,7 @@ const OurClients = () => {
       name: "Dinhata college",
       logo: "https://studyjankari.com/images/logo/dcfaf1073b727844baa718d807680d4e.jpg",
     },
-    {
-      id: 5,
-      name: "Shree gopal banerjee college",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAt5irwtSGnjljeNgs8c3dkkVOVG6VZ4bxGg&s",
-    },
-    {
-      id: 6,
-      name: "Raghunathpur College",
-      logo: "https://assets.allegiance-educare.com/colleges/thumb/250_250_col3588.jpg",
-    },
+
     {
       id: 7,
       name: "Bankura Samilani college",
@@ -97,7 +146,7 @@ const OurClients = () => {
     },
     {
       id: 9,
-      name: "Utkal Univercity",
+      name: "Utkal University",
       logo: "https://media.licdn.com/dms/image/v2/C5612AQFjCaZVLzKRuA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1605088823110?e=2147483647&v=beta&t=TKbX1TiziC0v32WnNC7EwX_-EXxyNl_76Rh_6_v6ZkM",
     },
     {
@@ -105,10 +154,15 @@ const OurClients = () => {
       name: "Kalinga-Institute-of-Industrial-Technology",
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYDzNc01l6GUc0bYFmTKAvT2ZgV5g4WOUM-g&s",
     },
+    {
+      id: 11,
+      name: "Kalinga-Institute-of-Industrial-Technology",
+      logo: "https://miro.medium.com/v2/resize:fit:960/0*hwu5W1dCF80Y3Cp-.jpg",
+    },
   ];
 
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
+    <section className="py-2  bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
@@ -134,7 +188,7 @@ const OurClients = () => {
             }}
             whileHover={{ x: "0%", transition: { duration: 0 } }} // pause on hover
           >
-            {clients.concat(clients).map((client, idx) => (
+            {odsclients.concat(odsclients).map((client, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 w-40 flex-shrink-0"
@@ -142,7 +196,40 @@ const OurClients = () => {
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="h-18 object-contain mb-3"
+                  className="h-[5rem] object-contain mb-3"
+                />
+                <span className="text-gray-800 dark:text-gray-200 text-sm font-semibold text-center">
+                  {client.name}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* scroll right */}
+        <div className="overflow-hidden relative mb-8">
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["-50%", "0%"] }} // ✅ now scrolls from left to right
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              },
+            }}
+            whileHover={{ x: "0%", transition: { duration: 0 } }} // pause on hover
+          >
+            {ofdclients.concat(ofdclients).map((client, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 w-40 flex-shrink-0"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="h-[5rem] object-contain mb-3"
                 />
                 <span className="text-gray-800 dark:text-gray-200 text-sm font-semibold text-center">
                   {client.name}

@@ -23,6 +23,7 @@ import SubcategoryProductsPage from "./pages/SubcategoryProductsPage";
 
 import ProductShowPage from "./pages/ProductShowPage";
 import AboutSection from "./components/AboutSection";
+import Contact from "./components/Contact";
 
 const HomePage = () => (
   <>
@@ -75,6 +76,7 @@ function App() {
               <Route path="/furniture" element={<Furniture />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/contact" element={<Contact />} />
 
               {/* Updated routes to use the single ProductShowPage */}
               <Route

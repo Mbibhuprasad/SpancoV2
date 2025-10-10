@@ -4,16 +4,16 @@ const EventGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
-    "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-    "https://images.pexels.com/photos/3184430/pexels-photo-3184430.jpeg",
-    "https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg",
-    "https://images.pexels.com/photos/1181352/pexels-photo-1181352.jpeg",
-    "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
-    "https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg",
-    "https://images.pexels.com/photos/1181642/pexels-photo-1181642.jpeg",
-    "https://images.pexels.com/photos/3184301/pexels-photo-3184301.jpeg",
-    "https://images.pexels.com/photos/3184632/pexels-photo-3184632.jpeg",
-    "https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg",
+    "/public/DSC_0047.JPG",
+    "/public/DSC_0050.JPG",
+    "/public/DSC_0056.JPG",
+    "public/DSC_0166.JPG",
+    "/public/DSC_0168.JPG",
+    "/public/DSC_0171.JPG",
+    "/public/DSC_0185.JPG",
+    "/public/DSC_0188.JPG",
+    "/public/DSC_0191.JPG",
+
   ];
 
   return (

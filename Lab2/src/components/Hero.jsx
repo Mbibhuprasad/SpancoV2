@@ -22,7 +22,7 @@ const Hero = () => {
       id: 1,
       name: "Physics Lab",
       image:
-        "https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "",
       color: "Science Blue",
       gradient: "from-[#703233] to-[#ce6567]",
     },
@@ -30,7 +30,7 @@ const Hero = () => {
       id: 2,
       name: "Chemistry Lab",
       image:
-        "https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "",
       color: "Molecular Green",
       gradient: "from-[#9a3b3d] to-[#de8b8c]",
     },
@@ -38,7 +38,7 @@ const Hero = () => {
       id: 3,
       name: "Biology Lab",
       image:
-        "https://images.pexels.com/photos/2280547/pexels-photo-2280547.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "",
       color: "Nature Green",
       gradient: "from-[#9a3b3d] to-[#ebb6b7]",
     },
@@ -48,12 +48,12 @@ const Hero = () => {
     {
       icon: Zap,
       value: "500+",
-      label: "Active Students",
+      label: "Active Clients",
       color: "text-yellow-500",
     },
     {
       icon: Shield,
-      value: "50+",
+      value: "5000+",
       label: "Lab Equipments",
       color: "text-blue-500",
     },
@@ -171,7 +171,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-400/20 to-red-400/20 dark:from-orange-500/10 dark:to-red-500/10 rounded-full blur-3xl animate-pulse"
+            className="absolute top-20 left-10 w-70 h-70 bg-gradient-to-r from-orange-400/20 to-red-400/20 dark:from-orange-500/10 dark:to-red-500/10 rounded-full blur-3xl animate-pulse"
           ></motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -220,7 +220,7 @@ const Hero = () => {
               </motion.div>
 
               <motion.div variants={fadeIn} className="space-y-4">
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="block text-gray-900 dark:text-white">
                     Explore The
                   </span>
@@ -249,7 +249,7 @@ const Hero = () => {
                 </h1>
                 <motion.p
                   variants={fadeIn}
-                  className="text-xl text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed"
+                  className="text-lg text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed"
                 >
                   Step into our advanced laboratories for Physics, Chemistry,
                   and Biology. Conduct hands-on experiments, learn through
@@ -323,7 +323,7 @@ const Hero = () => {
                   animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                   exit={{ scale: 0.8, opacity: 0, rotateY: -90 }}
                   transition={{ duration: 0.6, type: "spring" }}
-                  className="relative overflow-hidden w-full h-[450px]"
+                  className="relative overflow-hidden w-full h-[500px]"
                 >
                   <img
                     src={currentLab.image}

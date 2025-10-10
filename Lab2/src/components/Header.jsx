@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
   Moon,
   Sun,
   Menu,
@@ -16,7 +20,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useTheme } from "../context/ThemeContext";
 import TestRideModal from "./Contact";
-// import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -32,7 +35,6 @@ const Header = () => {
   const location = useLocation();
   const headerRef = useRef(null);
 
-  // FIX: Access environment variables outside fetch functions to avoid 'import.meta' issue
   // Determine if we are running in a mock environment (i.e., VITE_BACKEND_URI is not available)
   const VITE_BACKEND_URI =
     typeof import.meta.env.VITE_BACKEND_URI !== "undefined"
@@ -286,54 +288,12 @@ const Header = () => {
         className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg sticky top-0 z-40 transition-all duration-300"
       >
         <div className="">
-          {/* Top bar */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-gradient-to-r from-[#703233] to-[#973E42] hidden md:flex justify-between items-center py-3 px-10 text-sm border-b border-gray-200 dark:border-gray-700"
-          >
-            <div className="flex items-center space-x-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-2"
-              >
-                <Phone className="w-4 h-4 text-white" />
-                <span className="text-white dark:text-gray-300">
-                  +91 9338273911
-                </span>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-2"
-              >
-                <Mail className="w-4 h-4 text-white" />
-                <span className="text-white dark:text-gray-300">
-                  spancotek@gmail.com
-                </span>
-              </motion.div>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-800 transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="w-4 h-4 text-white" />
-              ) : (
-                <Moon className="w-4 h-4 text-white" />
-              )}
-            </motion.button>
-          </motion.div>
-
           {/* Main header */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex justify-between items-center py-4 px-10"
+            className="flex justify-between items-center py-2 px-8"
           >
             <motion.div
               variants={itemVariants}
@@ -344,7 +304,7 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }}
                   className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
                   alt="Logo spancotek"
-                  src="/spanco-tek.png"
+                  src="/Screenshot 2025-10-09 150426.png"
                 />
               </Link>
             </motion.div>
@@ -512,14 +472,73 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center space-x-4">
+              <div className="hidden  md:flex flex-col">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-2"
+                >
+                  <Phone className="w-4 h-4 font-bold text-[#973E42]" />
+                  <span className="text-[#973E42] font-bold dark:text-gray-100">
+                    +91 9338273911
+                  </span>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-1"
+                >
+                  <Mail className="w-4 h-4 text-[#973E42]" />
+                  <span className="text-[#973E42] font-bold dark:text-gray-300">
+                    spancotek@gmail.com
+                  </span>
+                </motion.div>
+              </div>
+              <div className="hidden md:flex space-x-4">
+                <motion.a
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#703233] transition-colors duration-200"
+                >
+                  <Facebook className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                >
+                  <Twitter className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                >
+                  <Instagram className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                >
+                  <Youtube className="w-5 h-5" />
+                </motion.a>
+              </div>
+
               <motion.button
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsTestRideModalOpen(true)}
-                className="hidden md:block bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
+                onClick={toggleTheme}
+                className="hidden md:block p-1 rounded-lg hover:bg-gray-600 dark:hover:bg-gray-800 transition-colors duration-200"
+                aria-label="Toggle theme"
               >
-                Contact Us
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-white" />
+                ) : (
+                  <Moon className="w-5 h-5 text-black" />
+                )}
               </motion.button>
 
               {/* Mobile theme toggle - Removed from top bar to keep consistency with original code */}
