@@ -16,11 +16,11 @@ import {
 // Contact Modal Component
 const ContactUsModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -42,11 +42,11 @@ const ContactUsModal = ({ isOpen, onClose }) => {
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
         });
         onClose();
       }, 3000);
@@ -108,7 +108,8 @@ const ContactUsModal = ({ isOpen, onClose }) => {
               <div className="bg-gradient-to-r from-[#703233] to-[#973E42] p-4 rounded-lg text-white mb-6">
                 <h3 className="font-bold mb-2">How we help</h3>
                 <p className="text-sm">
-                  Send us your query — for product info, demos, quotations or service requests. We'll respond within 24 hours.
+                  Send us your query — for product info, demos, quotations or
+                  service requests. We'll respond within 24 hours.
                 </p>
               </div>
 
@@ -350,9 +351,10 @@ const Furniture = () => {
       <section className="relative py-20 bg-gradient-to-br from-blue-100 via-white to-green-50 dark:from-gray-800 dark:via-gray-900 dark:to-black">
         <div
           className="absolute inset-0 opacity-20"
-          style={{ 
-            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)",
-            backgroundSize: "20px 20px"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)",
+            backgroundSize: "20px 20px",
           }}
         ></div>
 
@@ -398,7 +400,7 @@ const Furniture = () => {
                   Phone
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  +91 9876543210
+                  +91 9338273911
                 </p>
               </div>
               <div className="text-center">
@@ -409,7 +411,7 @@ const Furniture = () => {
                   Email
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  info@school.com
+                  spancotek@gmail.com
                 </p>
               </div>
               <div className="text-center">
@@ -420,17 +422,18 @@ const Furniture = () => {
                   Address
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300">
-                  123 School Street, Education City
+                  Sailshree Vihar, Patia. Spancotek Pvt Ltd, Bhubaneswar, Odisha
+                  - 751024
                 </p>
               </div>
             </div>
             <div className="text-center mt-6">
-              <button 
+              {/* <button
                 onClick={openContactModal}
                 className="bg-gradient-to-r from-[#703233] to-[#973E42] text-white px-8 py-3 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 font-semibold"
               >
                 Contact Us Now
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

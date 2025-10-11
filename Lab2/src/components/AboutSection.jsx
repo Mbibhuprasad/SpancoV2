@@ -5,9 +5,8 @@ import { useTheme } from "../context/ThemeContext";
 const AboutSection = () => {
   const { isDarkMode } = useTheme();
   return (
-    <section className="relative py-12 md:py-16 overflow-hidden">
-      {/* Bottom Gradient Border */}
-      <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-[#703233] to-[#973E42]" />
+    <section className="relative py-4 md:py-6 overflow-hidden">
+   
 
       <div className="max-w-[90%] md:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col md:flex-row items-center gap-10 md:gap-12">
         {/* Left Content */}

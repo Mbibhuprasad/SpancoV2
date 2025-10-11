@@ -497,7 +497,7 @@ const Header = () => {
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#703233] transition-colors duration-200"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#703233] hover:text-white transition-colors duration-200"
                 >
                   <Facebook className="w-5 h-5" />
                 </motion.a>
@@ -505,7 +505,7 @@ const Header = () => {
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] hover:text-white transition-colors duration-200"
                 >
                   <Twitter className="w-5 h-5" />
                 </motion.a>
@@ -513,7 +513,7 @@ const Header = () => {
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] hover:text-white transition-colors duration-200"
                 >
                   <Instagram className="w-5 h-5" />
                 </motion.a>
@@ -521,7 +521,7 @@ const Header = () => {
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] transition-colors duration-200"
+                  className="p-2 bg-gray-100 rounded-lg hover:bg-[#973E42] hover:text-white transition-colors duration-200"
                 >
                   <Youtube className="w-5 h-5" />
                 </motion.a>

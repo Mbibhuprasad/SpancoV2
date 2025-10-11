@@ -152,12 +152,7 @@ const OurClients = () => {
     {
       id: 10,
       name: "Kalinga-Institute-of-Industrial-Technology",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYDzNc01l6GUc0bYFmTKAvT2ZgV5g4WOUM-g&s",
-    },
-    {
-      id: 11,
-      name: "Kalinga-Institute-of-Industrial-Technology",
-      logo: "https://miro.medium.com/v2/resize:fit:960/0*hwu5W1dCF80Y3Cp-.jpg",
+      logo: "https://blog.ipleaders.in/wp-content/uploads/2016/06/make-in-India-logo.jpg",
     },
   ];
 

@@ -14,12 +14,12 @@ const CertificationPage = () => {
     {
       id: 2,
       img: "/Screenshot 2025-10-06 164723.png",
-      title: "ISO 14001:2015 Certified",
+      title: "Environmental Management Certified",
     },
     {
       id: 3,
       img: "/WhatsApp Image 2025-10-09 at 15.03.23_88d18d98.jpg",
-      title: "ISO 9001:2015 Certified",
+      title: "Quality Management Certified",
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ const CertificationPage = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       viewport={{ once: true }}
-      className={`py-16 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
+      className={`py-8 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
