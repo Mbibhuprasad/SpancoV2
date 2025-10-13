@@ -400,7 +400,7 @@ const ViewDetailsModal = ({
                       "https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=600"
                     }
                     alt={product.name}
-                    className="w-full h-80 object-cover rounded-xl"
+                    className="w-full h-80 object-contain rounded-xl"
                   />
                   <div className="grid grid-cols-3 gap-4">
                     {product.image?.slice(0, 3).map((img, index) => (

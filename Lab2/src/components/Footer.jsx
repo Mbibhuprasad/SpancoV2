@@ -115,15 +115,12 @@ const Footer = () => {
         >
           {/* Company Info */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="w-10 h-10 bg-gradient-to-r from-[#703233] to-[#973E42] rounded-lg flex items-center justify-center"
-              >
-                <span className="text-white font-bold text-xl">S</span>
-              </motion.div>
-              <span className="text-2xl font-bold">Spanco Tek</span>
-            </div>
+            <motion.img
+              whileHover={{ scale: 1.05 }}
+              className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
+              alt="Logo spancotek"
+              src="/logo  spancotek.png"
+            />
             <motion.p
               whileHover={{ x: 5 }}
               className="text-gray-400 leading-relaxed"
