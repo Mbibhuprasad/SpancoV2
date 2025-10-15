@@ -293,7 +293,7 @@ const Header = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex justify-between items-center py-2 px-8"
+            className="flex justify-between items-center py-1 px-8"
           >
             <motion.div
               variants={itemVariants}
@@ -302,9 +302,9 @@ const Header = () => {
               <Link to="/">
                 <motion.img
                   whileHover={{ scale: 1.05 }}
-                  className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
+                  className="max-w-[180px] md:max-w-[280px] h-auto object-contain"
                   alt="Logo spancotek"
-                  src="/Screenshot 2025-10-09 150426.png"
+                  src="/spanco-tek-00003.png"
                 />
               </Link>
             </motion.div>

@@ -119,7 +119,7 @@ const Footer = () => {
               whileHover={{ scale: 1.05 }}
               className="max-w-[180px] md:max-w-[220px] h-auto object-contain"
               alt="Logo spancotek"
-              src="/logo  spancotek.png"
+              src="/spanco-tek-00003.png"
             />
             <motion.p
               whileHover={{ x: 5 }}
